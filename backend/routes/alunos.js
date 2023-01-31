@@ -4,7 +4,12 @@ const router = express.Router();
 const query = require('../database/query');
 
 router.get('/', async (req, res) => {
-  res.send(await query.findAll());
+  try {
+    const result = await query.findAll();
+    res.send(result);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
 });
 
 router.get('/:id', async (req, res) => {

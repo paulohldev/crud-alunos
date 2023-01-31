@@ -1,13 +1,15 @@
-import './index.css';
+// import './index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './views/Home';
-import Lista from './views/Lista';
-import Formulario from './views/Formulario';
-import NotFound from './views/NotFound';
+import Home from './components/Home';
+import Lista from './components/List/Lista';
+import Formulario from './components/Forms/Formulario';
+import NotFound from './NotFound';
+import { GlobalStyles } from './components/styles';
 
 function App() {
   return (
     <>
+      <GlobalStyles />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />

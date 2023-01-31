@@ -1,52 +1,37 @@
 const connection = require('./db');
 
-const findAll = () => {
+const queryConsult = (query, ...rest) => {
   return connection
     .promise()
-    .query('SELECT * FROM alunos')
+    .query(query, ...rest)
     .then((result) => result[0])
     .catch((error) => error);
+};
+
+const findAll = () => {
+  return queryConsult('SELECT * FROM alunos');
 };
 
 const findById = (id) => {
-  return connection
-    .promise()
-    .query(`SELECT * FROM alunos WHERE id = ?`, [id])
-    .then((result) => result[0])
-    .catch((error) => error);
+  return queryConsult(`SELECT * FROM alunos WHERE id = ?`, id);
 };
 
 const addAluno = async (aluno) => {
-  return connection
-    .promise()
-    .query(`INSERT INTO alunos (nome, curso, trancado) VALUES (?,?,?)`, [
-      aluno.nome,
-      aluno.curso,
-      aluno.trancado,
-    ])
-    .then((result) => result[0])
-    .catch((err) => err);
+  return queryConsult(
+    `INSERT INTO alunos (nome, curso, trancado) VALUES (?,?,?)`,
+    [aluno.nome, aluno.curso, aluno.trancado],
+  );
 };
 
 const deleteAluno = (id) => {
-  return connection
-    .promise()
-    .query(`DELETE FROM alunos WHERE id = ?`, [id])
-    .then((result) => result[0])
-    .catch((err) => err);
+  return queryConsult(`DELETE FROM alunos WHERE id = ?`, id);
 };
 
 const editAluno = (aluno, id) => {
-  return connection
-    .promise()
-    .query(`UPDATE alunos SET nome = ?, curso = ?, trancado = ? WHERE id = ?`, [
-      aluno.nome,
-      aluno.curso,
-      aluno.trancado,
-      id,
-    ])
-    .then((result) => result)
-    .catch((err) => err);
+  return queryConsult(
+    `UPDATE alunos SET nome = ?, curso = ?, trancado = ? WHERE id = ?`,
+    [aluno.nome, aluno.curso, aluno.trancado, id],
+  );
 };
 
 module.exports = {
