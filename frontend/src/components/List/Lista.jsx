@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../Link';
 import { Table, TableRow, Thead, Tdata, Tbody } from '../styles';
 
 const Lista = () => {
@@ -21,29 +22,32 @@ const Lista = () => {
   }, []);
 
   return (
-    <Table>
-      <Tbody>
-        <TableRow>
-          <Thead>ID</Thead>
-          <Thead>Nome</Thead>
-          <Thead>Curso</Thead>
-          <Thead>Trancado</Thead>
-          <Thead colSpan={2}>Opções</Thead>
-        </TableRow>
-        {data.map((aluno, index) => {
-          return (
-            <TableRow key={index}>
-              <Tdata>{aluno.id}</Tdata>
-              <Tdata>{aluno.nome}</Tdata>
-              <Tdata>{aluno.curso}</Tdata>
-              <Tdata>{aluno.trancado}</Tdata>
-              <Tdata>Editar</Tdata>
-              <Tdata>Remover</Tdata>
-            </TableRow>
-          );
-        })}
-      </Tbody>
-    </Table>
+    <>
+      <Button />
+      <Table>
+        <Tbody>
+          <TableRow>
+            <Thead>ID</Thead>
+            <Thead>Nome</Thead>
+            <Thead>Curso</Thead>
+            <Thead>Trancado</Thead>
+            <Thead colSpan={2}>Opções</Thead>
+          </TableRow>
+          {data.map((aluno, index) => {
+            return (
+              <TableRow key={index}>
+                <Tdata>{aluno.id}</Tdata>
+                <Tdata>{aluno.nome}</Tdata>
+                <Tdata>{aluno.curso}</Tdata>
+                <Tdata>{aluno.trancado}</Tdata>
+                <Tdata>Editar</Tdata>
+                <Tdata>Remover</Tdata>
+              </TableRow>
+            );
+          })}
+        </Tbody>
+      </Table>
+    </>
   );
 };
 

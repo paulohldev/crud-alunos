@@ -16,7 +16,7 @@ const findById = (id) => {
   return queryConsult(`SELECT * FROM alunos WHERE id = ?`, id);
 };
 
-const addAluno = async (aluno) => {
+const addAluno = (aluno) => {
   return queryConsult(
     `INSERT INTO alunos (nome, curso, trancado) VALUES (?,?,?)`,
     [aluno.nome, aluno.curso, aluno.trancado],
