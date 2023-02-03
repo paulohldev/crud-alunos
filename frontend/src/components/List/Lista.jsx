@@ -1,9 +1,11 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../Link';
 import { Table, TableRow, Thead, Tdata, Tbody } from '../styles';
 
 const Lista = () => {
   const [data, setData] = React.useState([]);
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     const dados = await fetch('http://localhost:3000/alunos', {
@@ -18,8 +20,17 @@ const Lista = () => {
 
   React.useEffect(() => {
     fetchData();
-    console.log(data);
   }, []);
+
+  const removeAluno = async (id) => {
+    await fetch(`http://localhost:3000/alunos/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    navigate('/alunos');
+  };
 
   return (
     <>
@@ -40,8 +51,16 @@ const Lista = () => {
                 <Tdata>{aluno.nome}</Tdata>
                 <Tdata>{aluno.curso}</Tdata>
                 <Tdata>{aluno.trancado}</Tdata>
-                <Tdata>Editar</Tdata>
-                <Tdata>Remover</Tdata>
+
+                <Tdata>
+                  <Link to={`editar/${aluno.id}`}>Editar</Link>
+                </Tdata>
+
+                <Tdata>
+                  <Link to={'/alunos'} onClick={() => removeAluno(aluno.id)}>
+                    Remover
+                  </Link>
+                </Tdata>
               </TableRow>
             );
           })}

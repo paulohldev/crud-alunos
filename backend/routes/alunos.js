@@ -38,8 +38,6 @@ router.delete('/:id', async (req, res) => {
 
 router.put('/editar/:id', async (req, res) => {
   const paramsID = req.params.id;
-  console.log(paramsID);
-  console.log(req.body);
   if (!req.body.nome || !req.body.curso || !req.body.trancado) {
     return res
       .status(400)

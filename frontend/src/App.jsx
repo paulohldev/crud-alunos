@@ -15,6 +15,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="alunos" element={<Lista />} />
           <Route path="alunos/formulario" element={<Formulario />} />
+          <Route path="alunos/editar/:id" element={<Formulario />} />
+          <Route path="alunos/:id" element={<Lista />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
